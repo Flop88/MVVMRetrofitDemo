@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVVMRetrofitDemo</string>
+    <string name="api_key">c015193897ffa38b9856a180cbadfa3d</string>
 </resources>
