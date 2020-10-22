@@ -1,1 +1,6 @@
-"# MVVMRetrofitDemo" 
+**MVVMRetrofitDemo**
+
+**Dependencies**
+- Retrofit
+- Gson
+- Glide
