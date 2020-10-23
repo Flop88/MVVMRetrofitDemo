@@ -1,6 +1,7 @@
 package ru.mvlikhachev.mvvmretrofitdemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 import ru.mvlikhachev.mvvmretrofitdemo.R;
 import ru.mvlikhachev.mvvmretrofitdemo.model.Result;
+import ru.mvlikhachev.mvvmretrofitdemo.view.MovieDetailsActivity;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultViewHolder> {
 
@@ -70,6 +72,21 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
             titleTextView = itemView.findViewById(R.id.titleTextView);
             popularityTextView = itemView.findViewById(R.id.popularityTextView);
             movieImageView = itemView.findViewById(R.id.movieImageView);
+
+            itemView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    Result result = results.get(position);
+                    Intent intent = new Intent(context, MovieDetailsActivity.class);
+
+                    intent.putExtra("movieData", result);
+                    context.startActivity(intent);
+                }
+
+
+            });
+
         }
     }
 }

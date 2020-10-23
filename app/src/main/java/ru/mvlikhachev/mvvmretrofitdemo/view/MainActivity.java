@@ -1,4 +1,4 @@
-package ru.mvlikhachev.mvvmretrofitdemo;
+package ru.mvlikhachev.mvvmretrofitdemo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import ru.mvlikhachev.mvvmretrofitdemo.R;
 import ru.mvlikhachev.mvvmretrofitdemo.adapter.ResultAdapter;
 import ru.mvlikhachev.mvvmretrofitdemo.model.MovieApiResponse;
 import ru.mvlikhachev.mvvmretrofitdemo.model.Result;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
