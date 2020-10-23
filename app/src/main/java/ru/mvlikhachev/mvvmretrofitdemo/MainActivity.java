@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -28,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView resultRecyclerView;
     private ResultAdapter adapter;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         getPopularMovies();
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setColorSchemeColors(R.color.design_default_color_primary);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getPopularMovies();
+        });
     }
 
     public void getPopularMovies() {
@@ -50,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     results = (ArrayList<Result>) movieApiResponse.getResults();
 
                     fillRecyclerView();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
 
             }

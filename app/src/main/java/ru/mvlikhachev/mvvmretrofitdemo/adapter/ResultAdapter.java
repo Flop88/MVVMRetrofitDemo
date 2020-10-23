@@ -48,6 +48,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
 
         Glide.with(context)
                 .load(imagePath)
+                .placeholder(R.drawable.progress_circle)
                 .into(holder.movieImageView);
 
     }
