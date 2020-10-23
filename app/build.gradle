@@ -47,4 +47,14 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    //MVVM
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
+    // Annotation processor
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+
+
+
 }
