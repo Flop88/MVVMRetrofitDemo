@@ -1,6 +1,7 @@
 package ru.mvlikhachev.mvvmretrofitdemo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -23,6 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import ru.mvlikhachev.mvvmretrofitdemo.R;
 import ru.mvlikhachev.mvvmretrofitdemo.adapter.ResultAdapter;
+import ru.mvlikhachev.mvvmretrofitdemo.databinding.ActivityMainBinding;
 import ru.mvlikhachev.mvvmretrofitdemo.model.MovieApiResponse;
 import ru.mvlikhachev.mvvmretrofitdemo.model.Result;
 import ru.mvlikhachev.mvvmretrofitdemo.service.MovieApiService;
@@ -39,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityViewModel mainActivityViewModel;
 
+    private ActivityMainBinding activityMainBinding;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        activityMainBinding = DataBindingUtil.setContentView(this,
+                R.layout.activity_main);
+
+
 
         mainActivityViewModel = new ViewModelProvider
                 .AndroidViewModelFactory(getApplication())
@@ -51,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         getPopularMovies();
 
-        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout = activityMainBinding.swiperefresh;
         swipeRefreshLayout.setColorSchemeColors(R.color.design_default_color_primary);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             getPopularMovies();
@@ -68,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillRecyclerView() {
 
-        resultRecyclerView = findViewById(R.id.resultRecyclerView);
+        resultRecyclerView = activityMainBinding.resultRecyclerView;
 
         adapter = new ResultAdapter(this, results);
 
