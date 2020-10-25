@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ import ru.mvlikhachev.mvvmretrofitdemo.viewmodel.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Result> results;
+    private PagedList<Result> results;
     private RecyclerView resultRecyclerView;
     private ResultAdapter adapter;
 
@@ -69,9 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void getPopularMovies() {
 
-        mainActivityViewModel.getAllMovieData().observe(this, resultsList -> {
-              results = (ArrayList<Result>) resultsList;
-              fillRecyclerView();
+//        mainActivityViewModel.getAllMovieData().observe(this, resultsList -> {
+//              results = (ArrayList<Result>) resultsList;
+//              fillRecyclerView();
+//        });
+        mainActivityViewModel.getPagedListLiveData().observe(this, new Observer<PagedList<Result>>() {
+            @Override
+            public void onChanged(PagedList<Result> resultsList) {
+                results = resultsList;
+                fillRecyclerView();
+            }
         });
     }
 
@@ -79,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
         resultRecyclerView = activityMainBinding.resultRecyclerView;
 
-        adapter = new ResultAdapter(this, results);
+        adapter = new ResultAdapter(this);
+        adapter.submitList(results);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             resultRecyclerView.setLayoutManager(
